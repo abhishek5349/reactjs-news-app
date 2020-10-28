@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link';
 import LoadingPage from './components/LoadingPage';
 
-const API = '85a2aee1a68b4ebea4ad678ef23576e3';
 
 export default function DisplayNews({matchedNews}) {
     const router = useRouter();
@@ -57,7 +56,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({query, params}){
   const {id} = query || params;
-  const url = `http://newsapi.org/v2/top-headlines?country=us&apiKey=${API}`;
+  const url = `${process.env.API_BASE_URL}/top-headlines?country=us&apiKey=${process.env.API}`;
   const res = await Axios.get(url);
   const allNews = await res.data;
   const matchedNews = allNews.articles[id];

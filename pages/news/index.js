@@ -4,7 +4,6 @@ import Link from 'next/link';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const API = '85a2aee1a68b4ebea4ad678ef23576e3';
 
 export default function index({allNews}) {
     
@@ -45,7 +44,7 @@ export default function index({allNews}) {
 
 
 export async function getStaticProps(){
-    const url = `http://newsapi.org/v2/top-headlines?country=us&apiKey=${API}`;
+    const url = `${process.env.API_BASE_URL}/top-headlines?country=us&apiKey=${process.env.API}`;
     const res = await Axios.get(url);
     
     const allNews = await res.data;
